@@ -1,0 +1,45 @@
+#include <iostream>
+#include <map>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    int t;
+    cin >> t;
+
+    while (t--) {
+        int n;
+        cin >> n;
+
+        map<int, int> freq;
+        long long total = 0;
+
+        for (int i = 0; i < n; i++) {
+            int x;
+            cin >> x;
+
+            freq[x]++;
+            total += x;
+        }
+
+        int mostFrequent = 0;
+        int value = 0;
+
+        for (auto p : freq) {
+            if (p.second > mostFrequent) {
+                mostFrequent = p.second;
+                value = p.first;
+            }
+        }
+
+        int others = n - mostFrequent;
+        int used = min(mostFrequent, others + 2);
+
+        long long answer = total - 1LL * mostFrequent * value;
+        answer += 1LL * used * value;
+
+        cout << answer << endl;
+    }
+
+    return 0;
+}
